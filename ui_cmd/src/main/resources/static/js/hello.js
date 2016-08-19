@@ -15,10 +15,18 @@ angular.module('hello', [ 'ngRoute' ])
 
   })
   .controller('home', function($http) {
-    var self = this;
-    $http.get('/resource/').then(function(response) {
-      self.greeting = response.data;
-    })
+	  var self = this;
+	  $http.get('token').then(function(response) {
+	    $http({
+	      url : 'http://localhost:9000/resource/',
+	      method : 'GET',
+	      headers : {
+	        'X-Auth-Token' : response.data.token
+	      }
+	    }).then(function(response) {
+	      self.greeting = response.data;
+	    });
+	  })
   })
 .controller('navigation',
 
