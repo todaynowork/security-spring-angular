@@ -45,6 +45,7 @@ public class ResourceApplication extends WebSecurityConfigurerAdapter {
 		    return model;
 		  }
 	
+	 //http header session strategy "x-auth-token" with session id
 	  @Bean
 	  HeaderHttpSessionStrategy sessionStrategy() {
 	    return new HeaderHttpSessionStrategy();
