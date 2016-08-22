@@ -11,11 +11,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.session.web.http.HeaderHttpSessionStrategy;
+import org.springframework.session.web.http.HttpSessionStrategy;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,6 +64,13 @@ public class DemoApplication {
 	          .csrf()      //csrf cookie setting
 	          .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 	    }
+	    
+	    @Bean
+	    public HttpSessionStrategy httpSessionStrategy() {
+	        return new HeaderHttpSessionStrategy();
+	    }
 	  }
+	  
+	  
 }
 
