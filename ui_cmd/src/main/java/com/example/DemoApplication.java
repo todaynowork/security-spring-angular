@@ -19,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +41,7 @@ public class DemoApplication {
 	  
 	  //trick 
 	  @RequestMapping("/user")
+	  @CrossOrigin(origins="*", maxAge=3600,allowedHeaders={"x-auth-token", "x-requested-with"})    //csrf enable
 	  public Principal user(Principal user) {
 	    return user;
 	  }
